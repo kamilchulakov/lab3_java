@@ -4,7 +4,8 @@ public enum Location {
     NORTH,
     SOUTH,
     MOMMIE_DOL;
-    public String getLocation() {
+    @Override
+    public String toString() {
         if (this == MOMMIE_DOL) return "Муми-дол";
         else if (this == NORTH) return "север";
         else if (this == SOUTH) return "юг";

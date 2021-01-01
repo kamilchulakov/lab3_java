@@ -6,6 +6,7 @@ public abstract class Character {
     private ArrayList<Character> friends = new ArrayList<Character>();
     private int happiness = 0;
     private String sex = "male";
+    private State state = new State();
 
     protected Character(String name) {
         setName(name);
@@ -27,15 +28,12 @@ public abstract class Character {
         return name;
     }
 
-    public Character getFriend(int i) {
-        return friends.get(i);
+    public String getState() {
+        return state.toString();
     }
 
-    public String getInfo() {
-        String info = "";
-        if (sex.equals("male")) info = getName() + " был его лучшим другом.";
-        else info = "Конечно, ему нравилась " + getName() + ", но дружба с девочкой - это ведь совсем другое.";
-        return info;
+    public Character getFriend(int i) {
+        return friends.get(i);
     }
 
     public int getHappiness() {
@@ -46,11 +44,21 @@ public abstract class Character {
         sex = sex1;
     }
 
+    public void setState(Location location){
+        String before = getState();
+        state.stayAt(location);
+        System.out.printf("%s изменил состояние %s на %s.%n", getName(), before, getState());
+    }
+    public void setState(Character character){
+        state.stayNear(character);
+    }
+
+
     public void modHappiness(int happy) {
         int before = happiness;
         happiness += happy;
-        if (happiness > happy) System.out.printf("У %s улучшилось настроение!%n", getName());
-        else if (happiness < happy) System.out.printf("У %s ухудшилось настроение!%n", getName());
+        if (happiness > before) System.out.printf("У %s улучшилось настроение!%n", getName());
+        else if (happiness < before) System.out.printf("У %s ухудшилось настроение!%n", getName());
     }
 
     @Override
@@ -78,11 +86,13 @@ public abstract class Character {
         return sex;
     }
 
-    public boolean checkFriend(Character character) {
-        return (this.friends.contains(character));
-    }
+    public abstract void winterAction();
 
-    public abstract void seasonAction(Season season);
+    public abstract void springAction();
+
+    public abstract void summerAction();
+
+    public abstract void autumnAction();
 
     public abstract void randomAction();
 }

@@ -2,7 +2,7 @@ public class StoryRunner {
     Timer timer = new BasicTimer();
     Context context = new Context();
 
-    public void process() {
+    public void process() throws LocationException {
         if (timer.getSeason() == Season.WINTER) {
             context.setStrategy(new WinterStrategy());
         }
@@ -19,7 +19,7 @@ public class StoryRunner {
         timer.process();
     }
 
-    public void run(int seasons) {
+    public void run(int seasons) throws LocationException {
         for (int i = 0; i < seasons; i++) {
             this.process();
         }

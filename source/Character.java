@@ -1,23 +1,25 @@
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 
 public abstract class Character {
     private String name;
     private ArrayList<Character> friends = new ArrayList<Character>();
     private int happiness = 0;
+    private Location location;
     private String sex = "male";
-    private State state = new State();
 
     protected Character(String name) {
-        setName(name);
+        this(Location.MOMMIE_DOL, name);
     }
+
     protected Character() {
-        this("Character");
+        this(Location.MOMMIE_DOL,"Character");
     }
 
-
-    public void addFriend(Character character) {
-        this.friends.add(character);
+    protected Character(Location location, String name) {
+        setName(name);
+        setLocation(location);
     }
 
     public void setName(String name) {
@@ -28,37 +30,50 @@ public abstract class Character {
         return name;
     }
 
-    public String getState() {
-        return state.toString();
+    public void addFriend(Character character) {
+        this.friends.add(character);
     }
 
-    public Character getFriend(int i) {
-        return friends.get(i);
+    public Character getFriend(int position) {
+        return friends.get(position);
     }
 
-    public int getHappiness() {
-        return happiness;
+    public Character getRandomFriend() {
+        Random random = new Random();
+        return friends.get(random.nextInt(friends.size()));
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+        //System.out.printf("Место нахождения %s изменилось на %s!%n", getName(), getLocation());
+    }
+
+    public Location getLocation() {
+        return location;
     }
 
     public void setSex(String sex1) {
         sex = sex1;
     }
 
-    public void setState(Location location){
-        String before = getState();
-        state.stayAt(location);
-        System.out.printf("%s изменил состояние %s на %s.%n", getName(), before, getState());
-    }
-    public void setState(Character character){
-        state.stayNear(character);
+    public String getSex() {
+        return sex;
     }
 
+    public int getHappiness() {
+        return happiness;
+    }
 
     public void modHappiness(int happy) {
-        int before = happiness;
+        int before = getHappiness();
         happiness += happy;
         if (happiness > before) System.out.printf("У %s улучшилось настроение!%n", getName());
         else if (happiness < before) System.out.printf("У %s ухудшилось настроение!%n", getName());
+    }
+
+    public void dream() {
+        if (getSex().equals("female")) System.out.println(getName() + " мечтательно задумалась на долгое время.");
+        else System.out.println(getName() + " мечтательно задумался на долгое время.");
     }
 
     @Override
@@ -72,27 +87,19 @@ public abstract class Character {
                 Objects.equals(sex, character.sex);
     }
 
-    public void dream() {
-        System.out.println(getName() + " мечтательно задумался на долгое время.");
-    }
-
 
     @Override
     public int hashCode() {
         return Objects.hash(name, friends, happiness, sex);
     }
 
-    public String getSex() {
-        return sex;
-    }
-
     public abstract void winterAction();
 
-    public abstract void springAction();
+    public abstract void springAction() throws LocationException;
 
     public abstract void summerAction();
 
     public abstract void autumnAction();
 
-    public abstract void randomAction();
+    public abstract void randomAction() throws LocationException;
 }

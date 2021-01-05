@@ -1,8 +1,8 @@
 import java.util.List;
 
-public class SpringStrategy implements Strategy{
+public final class SpringStrategy implements Strategy{
     @Override
-    public void execute(List<Character> characters) {
+    public void execute(List<Character> characters) throws LocationException {
         for (Character character: characters) {
             character.springAction();
         }

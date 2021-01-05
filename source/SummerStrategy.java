@@ -1,9 +1,8 @@
 import java.util.List;
 
-public class SummerStrategy implements Strategy{
-
+public final class SummerStrategy implements Strategy{
     @Override
-    public void execute(List<Character> characters) {
+    public void execute(List<Character> characters) throws LocationException {
         for (Character character: characters) {
             character.randomAction();
             character.summerAction();

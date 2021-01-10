@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class StoryRunner {
     Timer timer;
     Context context;

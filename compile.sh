@@ -4,4 +4,4 @@ mkdir releases
 cd source
 javac -d ../classes *.java
 cd ../classes
-jar -cvfm ../releases/v1.0.jar ../manifest.txt *.class
+jar -cvfm ../releases/v1.1.jar ../manifest.txt *.class

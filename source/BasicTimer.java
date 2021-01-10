@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class BasicTimer implements Timer{
     private Season season;
 
@@ -6,6 +8,21 @@ public class BasicTimer implements Timer{
         System.out.println("_________________________________________________");
         System.out.printf("%s", ConsoleColors.BLUE_BACKGROUND);
         this.setSeason(Season.WINTER);
+    }
+
+    public BasicTimer(String parameter) {
+        if (parameter.equalsIgnoreCase("random")) {
+            Random random = new Random();
+            Season[] seasons = new Season[] {Season.WINTER, Season.SPRING, Season.SUMMER, Season.AUTUMN};
+            season = seasons[random.nextInt(seasons.length)];
+            process();
+        }
+        else {
+            System.out.printf("%s", ConsoleColors.RESET);
+            System.out.println("_________________________________________________");
+            System.out.printf("%s", ConsoleColors.BLUE_BACKGROUND);
+            this.setSeason(Season.WINTER);
+        }
     }
 
     @Override
@@ -45,4 +62,5 @@ public class BasicTimer implements Timer{
        }
 
     }
+
 }

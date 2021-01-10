@@ -3,6 +3,7 @@ public enum Season {
     SPRING,
     SUMMER,
     AUTUMN;
+
     public String toString() {
         if (this == WINTER) return "зима";
         else if (this == SPRING) return "весна";

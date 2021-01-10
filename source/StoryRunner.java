@@ -1,6 +1,18 @@
+import java.util.Random;
+
 public class StoryRunner {
-    Timer timer = new BasicTimer();
-    Context context = new Context();
+    Timer timer;
+    Context context;
+
+    public StoryRunner() {
+        timer = new BasicTimer();
+        context = new Context();
+    }
+
+    public StoryRunner(String parameter) {
+        context = new Context();
+        if (parameter.equals("random")) setRandomTimer();
+    }
 
     public void process() throws LocationException {
         if (timer.getSeason() == Season.WINTER) {
@@ -24,5 +36,9 @@ public class StoryRunner {
             this.process();
         }
         System.out.println("И вот конец истории.");
+    }
+
+    public void setRandomTimer() {
+        timer = new BasicTimer("random");
     }
 }

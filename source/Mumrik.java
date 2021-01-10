@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public final class Mumrik extends Character{
 
     public Mumrik(String name) {
@@ -57,7 +59,7 @@ public final class Mumrik extends Character{
         if (character.getLocation() != getLocation()) throw new LocationException();
         else {
             System.out.println(getName() + " решил рассказать " + character.getName() + " историю.");
-            StoryRunner story = new StoryRunner();
+            StoryRunner story = new StoryRunner("random");
             story.run(4);
             character.modHappiness(50);
         }

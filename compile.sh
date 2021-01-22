@@ -2,6 +2,6 @@ rm -rf classes releases
 mkdir classes
 mkdir releases
 cd source
-javac -d ../classes *.java
+javac -cp project/*/* -d ../classes project/*/*.java
 cd ../classes
-jar -cvfm ../releases/v1.1.jar ../manifest.txt *.class
+jar -cvfm ../releases/unstable.jar ../manifest.txt project/*/*.class

@@ -1,1 +1,1 @@
-java -cp releases/v1.0.jar Main
+java -jar releases/unstable.jar Main
